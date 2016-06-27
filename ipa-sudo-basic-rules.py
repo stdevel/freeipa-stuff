@@ -17,7 +17,7 @@ import subprocess
 
 #set logger and version
 LOGGER = logging.getLogger('ipa-sudo-basic-rules.py')
-vers = "0.1.1"
+vers = "0.1.2"
 
 
 
@@ -44,6 +44,8 @@ def import_definitions():
 		"fileperm-acl" : "Managing ACLs",
 		"locate" : "Managing locate database",
 		"networking" : "Managing network connections",
+		"firewall" : "Managing firewall configuration",
+		"time" : "Managing time/date configuration",
 		"processes" : "Managing processes",
 		"selinux" : "Managing SELinux",
 		"services" : "Managing system services",
@@ -55,6 +57,7 @@ def import_definitions():
 		"monitoring" : "Managing monitoring",
 		"ipa-client" : "Managing IPA clients",
 		"ipa-server" : "Managing IPA servers",
+		"rhn-server" : "Managing Red Hat Satellite",
 		"rhn-client" : "Managing Enterprise Linux clients",
 		"mysql-server" : "Managing MySQL servers"
 	}
@@ -63,23 +66,26 @@ def import_definitions():
 	cmds.update({"delegating" : ["/usr/sbin/visudo"]})
 	cmds.update({"drivers" : ["/sbin/modprobe", "/sbin/rmmod"]})
 	cmds.update({"editors" : ["/usr/bin/vi", "/usr/bin/vim"]})
-	cmds.update({"filemgmt" : ["/bin/cp", "/bin/mv", "/usr/bin/rsync", "/bin/rm", "/bin/ls", "/bin/echo", "/bin/cat", "/usr/bin/less", "/bin/more", "/usr/bin/tail", "/bin/df", "/bin/du"]})
+	cmds.update({"filemgmt" : ["/bin/cp", "/bin/mv", "/usr/bin/rsync", "/bin/rm", "/bin/ls", "/bin/echo", "/bin/cat", "/usr/bin/less", "/bin/more", "/usr/bin/tail", "/bin/df", "/bin/du", "/bin/mkdir", "/bin/rmdir"]})
 	cmds.update({"fileperm" : ["/bin/chgrp", "/bin/chmod", "/bin/chown"]})
 	cmds.update({"fileperm-acl" : ["/usr/bin/chacl", "/usr/bin/gefacl", "/usr/bin/setfacl"]})
 	cmds.update({"locate" : ["/usr/bin/updatedb"]})
-	cmds.update({"networking" : ["/sbin/ifconfig", "/sbin/mii-tool", "/usr/bin/net", "/sbin/iptables"]})
+	cmds.update({"networking" : ["/sbin/ifconfig", "/sbin/mii-tool", "/usr/bin/net", "/sbin/ifdown", "/sbin/ifup", "/bin/netstat"]})
+	cmds.update({"firewall" : ["/sbin/iptables", "/usr/sbin/lokkit", "/usr/bin/system-config-firewall-tui"]})
+	cmds.update({"time" : ["/sbin/hwclock", "/bin/timedatectl", "/usr/sbin/ntpdate"]})
 	cmds.update({"processes" : ["/bin/kill", "/usr/bin/killall", "/bin/nice"]})
 	cmds.update({"selinux" : ["/sbin/ausearch", "/usr/bin/audit2allow", "/usr/bin/audit2why", "/usr/sbin/semanage", "/usr/sbin/semodule", "/usr/sbin/setsebool", "/usr/sbin/setenforce"]})
 	cmds.update({"services" : ["/sbin/service", "/bin/systemctl", "/sbin/chkconfig"]})
 	cmds.update({"shells" : ["/bin/bash", "/bin/csh", "/bin/dash", "/bin/ksh", "/bin/mksh", "/bin/sh", "/bin/tcsh", "/bin/zsh", "/usr/bin/scl", "/usr/bin/screen", "/usr/bin/tmux"]})
 	cmds.update({"software" : ["/bin/rpm", "/usr/bin/up2date", "/usr/bin/yum", "/usr/bin/dnf"]})
-	cmds.update({"storage" : ["/bin/mount", "/bin/umount", "/sbin/fdisk", "/sbin/sfdisk", "/sbin/parted", "/sbin/partprobe", "/sbin/mkfs", "/sbin/mkfs.ext3", "/sbin/mkfs.ext4", "/sbin/mkfs.xfs", "/sbin/resize2fs", "/sbin/tune2fs", "/sbin/xfs_growfs", "/sbin/pvchange", "/sbin/pvcreate", "/sbin/pvdisplay", "/sbin/pvmove", "/sbin/pvremove", "/sbin/pvresize", "/sbin/pvs", "/sbin/pvscan", "/sbin/vgchange", "/sbin/vgcreate", "/sbin/vgdisplay", "/sbin/vgexport", "/sbin/vgextend", "/sbin/vgimport", "/sbin/vgreduce", "/sbin/vgremove", "/sbin/vgrename", "/sbin/vgs", "/sbin/vgscan", "/sbin/lvchange", "/sbin/lvcreate", "/sbin/lvdisplay", "/sbin/lvextend", "/sbin/lvreduce", "/sbin/lvremove", "/sbin/lvrename", "/sbin/lvresize", "/sbin/lvscan", "/sbin/lvs", "/usr/bin/rescan-scsi-bus.sh", "/usr/bin/scsi-rescan", "/sbin/multipath"]})
+	cmds.update({"storage" : ["/bin/mount", "/bin/umount", "/sbin/fdisk", "/sbin/sfdisk", "/sbin/parted", "/sbin/partprobe", "/sbin/mkfs", "/sbin/mkfs.ext3", "/sbin/mkfs.ext4", "/sbin/mkfs.xfs", "/sbin/resize2fs", "/sbin/tune2fs", "/sbin/xfs_growfs", "/sbin/pvchange", "/sbin/pvcreate", "/sbin/pvdisplay", "/sbin/pvmove", "/sbin/pvremove", "/sbin/pvresize", "/sbin/pvs", "/sbin/pvscan", "/sbin/vgchange", "/sbin/vgcreate", "/sbin/vgdisplay", "/sbin/vgexport", "/sbin/vgextend", "/sbin/vgimport", "/sbin/vgreduce", "/sbin/vgremove", "/sbin/vgrename", "/sbin/vgs", "/sbin/vgscan", "/sbin/lvchange", "/sbin/lvcreate", "/sbin/lvdisplay", "/sbin/lvextend", "/sbin/lvreduce", "/sbin/lvremove", "/sbin/lvrename", "/sbin/lvresize", "/sbin/lvscan", "/sbin/lvs", "/usr/bin/rescan-scsi-bus.sh", "/usr/bin/scsi-rescan", "/sbin/multipath", "/sbin/badblocks"]})
 	cmds.update({"su" : ["/bin/su", "/sbin/sulogin", "/sbin/sushell", "/sbin/runuser"]})
 	cmds.update({"usermgmt" : ["/usr/sbin/useradd", "/usr/sbin/userdel", "/usr/sbin/usermod", "/usr/sbin/groupadd", "/usr/sbin/groupdel", "/usr/sbin/groupmod", "/usr/bin/id", "/usr/bin/gpasswd", "/usr/bin/chage", "/bin/passwd", "/usr/bin/passwd", "/usr/bin/chfn", "/usr/bin/chsh", "/usr/sbin/vigr", "/usr/sbin/vipw"]})
 	cmds.update({"monitoring" : ["/usr/bin/omd","/usr/sbin/icinga2","/usr/bin/icingacli"]})
 	cmds.update({"ipa-client" : ["/usr/sbin/ipa-client-install", "/usr/sbin/ipa-client-automount", "/usr/sbin/ipa-certupdate", "/usr/bin/ipa-getcert", "/usr/sbin/ipa-getkeytab", "/usr/sbin/ipa-join", "/usr/sbin/ipa-rmkeytab"]})
 	cmds.update({"ipa-server" : ["/usr/bin/ipa", "/usr/sbin/ipa-ca-install", "/usr/sbin/ipa-csreplica-manage", "/usr/sbin/ipa-otptoken-import", "/usr/sbin/ipa-restore", "/usr/sbin/ipa-upgradeconfig", "/usr/sbin/ipa-adtrust-install", "/usr/sbin/ipactl", "/usr/sbin/ipa-kra-install", "/usr/sbin/ipa-replica-conncheck", "/usr/sbin/ipa-winsync-migrate", "/usr/sbin/ipa-advise", "/usr/sbin/ipa-dns-install", "/usr/sbin/ipa-ldap-updater", "/usr/sbin/ipa-replica-install", "/usr/sbin/ipa-server-certinstall", "/usr/sbin/ipa-backup", "/usr/sbin/ipa-managed-entries", "/usr/sbin/ipa-replica-manage", "/usr/sbin/ipa-server-install", "/usr/sbin/ipa-cacert-manage", "/usr/sbin/ipa-compat-manage", "/usr/sbin/ipa-nis-manage", "/usr/sbin/ipa-replica-prepare", "/usr/sbin/ipa-server-upgrade"]})
-	cmds.update({"rhn-client" : ["/usr/sbin/rhn_check", "/usr/sbin/rhnreg_ks", "/usr/bin/rhn_register", "/usr/bin/rhn-actions-control", "/usr/bin/rhncfg-client", "/usr/sbin/rhn-channel"]})
+	cmds.update({"rhn-server" : ["/usr/sbin/rhn-satellite", "/usr/sbin/spacewalk-service", "/usr/bin/rhn-satellite-activate", "/usr/bin/rhn-satellite-exporter", "/usr/bin/rhn-schema-version", "/usr/bin/spacewalk-cfg-get", "/usr/bin/spacewalk-common-channels", "/usr/bin/spacewalk-data-fsck", "/usr/bin/spacewalk-debug", "/usr/bin/spacewalk-export", "/usr/bin/spacewalk-export-channels", "/usr/bin/spacewalk-hostname-rename", "/usr/bin/spacewalk-remove-channel", "/usr/bin/spacewalk-report", "/usr/bin/spacewalk-repo-sync", "/usr/bin/spacewalk-schema-upgrade", "/usr/bin/spacewalk-selinux-enable", "/usr/bin/spacewalk-setup", "/usr/bin/spacewalk-setup-cobbler", "/usr/bin/spacewalk-setup-ipa-authentication", "/usr/bin/spacewalk-setup-jabberd"]})
+	cmds.update({"rhn-client" : ["/usr/sbin/rhn_check", "/usr/sbin/rhnreg_ks", "/usr/bin/rhn_register", "/usr/bin/rhn-actions-control", "/usr/bin/rhncfg-client", "/usr/sbin/rhn-channel", "/usr/sbin/rhn-profile-sync", "/usr/bin/subscription-manager"]})
 	cmds.update({"mysql-server" : ["/usr/bin/mysqladmin", "/usr/bin/mysql_secure_installation", "/usr/bin/mysql_install_db"]})
 	
 	#print definition version:
