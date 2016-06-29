@@ -17,7 +17,7 @@ import subprocess
 
 #set logger and version
 LOGGER = logging.getLogger('ipa-sudo-basic-rules.py')
-vers = "0.1.3"
+vers = "0.1.4"
 
 
 
@@ -76,12 +76,12 @@ def import_definitions():
 	cmds.update({"processes" : ["/bin/kill", "/usr/bin/killall", "/bin/nice"]})
 	cmds.update({"selinux" : ["/sbin/ausearch", "/usr/bin/audit2allow", "/usr/bin/audit2why", "/usr/sbin/semanage", "/usr/sbin/semodule", "/usr/sbin/setsebool", "/usr/sbin/setenforce"]})
 	cmds.update({"services" : ["/sbin/service", "/bin/systemctl", "/sbin/chkconfig"]})
-	cmds.update({"shells" : ["/bin/bash", "/bin/csh", "/bin/dash", "/bin/ksh", "/bin/mksh", "/bin/sh", "/bin/tcsh", "/bin/zsh", "/usr/bin/scl", "/usr/bin/screen", "/usr/bin/tmux", "/bin/vi", "/bin/vim","/bin/view"]})
-	cmds.update({"software" : ["/bin/rpm", "/usr/bin/up2date", "/usr/bin/yum", "/usr/bin/dnf"]})
+	cmds.update({"shells" : ["/bin/bash", "/bin/csh", "/bin/dash", "/bin/ksh", "/bin/mksh", "/bin/sh", "/bin/tcsh", "/bin/zsh", "/usr/bin/scl", "/usr/bin/screen", "/usr/bin/tmux", "/bin/vi", "/bin/vim", "/bin/view"]})
+	cmds.update({"software" : ["/bin/rpm", "/usr/bin/up2date", "/usr/bin/yum", "/usr/bin/dnf", "/usr/bin/package-cleanup", "/usr/sbin/rpmconf"]})
 	cmds.update({"storage" : ["/bin/mount", "/bin/umount", "/sbin/fdisk", "/sbin/sfdisk", "/sbin/parted", "/sbin/partprobe", "/sbin/mkfs", "/sbin/mkfs.ext3", "/sbin/mkfs.ext4", "/sbin/mkfs.xfs", "/sbin/resize2fs", "/sbin/tune2fs", "/sbin/xfs_growfs", "/sbin/pvchange", "/sbin/pvcreate", "/sbin/pvdisplay", "/sbin/pvmove", "/sbin/pvremove", "/sbin/pvresize", "/sbin/pvs", "/sbin/pvscan", "/sbin/vgchange", "/sbin/vgcreate", "/sbin/vgdisplay", "/sbin/vgexport", "/sbin/vgextend", "/sbin/vgimport", "/sbin/vgreduce", "/sbin/vgremove", "/sbin/vgrename", "/sbin/vgs", "/sbin/vgscan", "/sbin/lvchange", "/sbin/lvcreate", "/sbin/lvdisplay", "/sbin/lvextend", "/sbin/lvreduce", "/sbin/lvremove", "/sbin/lvrename", "/sbin/lvresize", "/sbin/lvscan", "/sbin/lvs", "/usr/bin/rescan-scsi-bus.sh", "/usr/bin/scsi-rescan", "/sbin/multipath", "/sbin/badblocks"]})
 	cmds.update({"su" : ["/bin/su", "/sbin/sulogin", "/sbin/sushell", "/sbin/runuser"]})
 	cmds.update({"usermgmt" : ["/usr/sbin/useradd", "/usr/sbin/userdel", "/usr/sbin/usermod", "/usr/sbin/groupadd", "/usr/sbin/groupdel", "/usr/sbin/groupmod", "/usr/bin/id", "/usr/bin/gpasswd", "/usr/bin/chage", "/bin/passwd", "/usr/bin/passwd", "/usr/bin/chfn", "/usr/bin/chsh", "/usr/sbin/vigr", "/usr/sbin/vipw"]})
-	cmds.update({"monitoring" : ["/usr/bin/omd","/usr/sbin/icinga2","/usr/bin/icingacli"]})
+	cmds.update({"monitoring" : ["/usr/bin/omd", "/usr/sbin/icinga2", "/usr/bin/icingacli"]})
 	cmds.update({"ipa-client" : ["/usr/sbin/ipa-client-install", "/usr/sbin/ipa-client-automount", "/usr/sbin/ipa-certupdate", "/usr/bin/ipa-getcert", "/usr/sbin/ipa-getkeytab", "/usr/sbin/ipa-join", "/usr/sbin/ipa-rmkeytab"]})
 	cmds.update({"ipa-server" : ["/usr/bin/ipa", "/usr/sbin/ipa-ca-install", "/usr/sbin/ipa-csreplica-manage", "/usr/sbin/ipa-otptoken-import", "/usr/sbin/ipa-restore", "/usr/sbin/ipa-upgradeconfig", "/usr/sbin/ipa-adtrust-install", "/usr/sbin/ipactl", "/usr/sbin/ipa-kra-install", "/usr/sbin/ipa-replica-conncheck", "/usr/sbin/ipa-winsync-migrate", "/usr/sbin/ipa-advise", "/usr/sbin/ipa-dns-install", "/usr/sbin/ipa-ldap-updater", "/usr/sbin/ipa-replica-install", "/usr/sbin/ipa-server-certinstall", "/usr/sbin/ipa-backup", "/usr/sbin/ipa-managed-entries", "/usr/sbin/ipa-replica-manage", "/usr/sbin/ipa-server-install", "/usr/sbin/ipa-cacert-manage", "/usr/sbin/ipa-compat-manage", "/usr/sbin/ipa-nis-manage", "/usr/sbin/ipa-replica-prepare", "/usr/sbin/ipa-server-upgrade"]})
 	cmds.update({"rhn-server" : ["/usr/sbin/rhn-satellite", "/usr/sbin/spacewalk-service", "/usr/bin/rhn-satellite-activate", "/usr/bin/rhn-satellite-exporter", "/usr/bin/rhn-schema-version", "/usr/bin/spacewalk-cfg-get", "/usr/bin/spacewalk-common-channels", "/usr/bin/spacewalk-data-fsck", "/usr/bin/spacewalk-debug", "/usr/bin/spacewalk-export", "/usr/bin/spacewalk-export-channels", "/usr/bin/spacewalk-hostname-rename", "/usr/bin/spacewalk-remove-channel", "/usr/bin/spacewalk-report", "/usr/bin/spacewalk-repo-sync", "/usr/bin/spacewalk-schema-upgrade", "/usr/bin/spacewalk-selinux-enable", "/usr/bin/spacewalk-setup", "/usr/bin/spacewalk-setup-cobbler", "/usr/bin/spacewalk-setup-ipa-authentication", "/usr/bin/spacewalk-setup-jabberd"]})
