@@ -17,7 +17,7 @@ import subprocess
 
 #set logger and version
 LOGGER = logging.getLogger('ipa-sudo-basic-rules.py')
-vers = "0.1.5"
+vers = "0.1.6"
 
 
 
@@ -60,7 +60,10 @@ def import_definitions():
 		"rhn-server" : "Managing Red Hat Satellite",
 		"rhn-client" : "Managing Enterprise Linux clients",
 		"mysql-server" : "Managing MySQL servers",
-		"postfix" : "Managing Postfix servers"
+		"postfix" : "Managing Postfix servers",
+		"disk-quotas" : "Managing disk quotas",
+		"nfs-server" : "Managing NFS servers",
+		"nfs-client" : "Managing NFS mounts"
 	}
 	
 	#command defintions
@@ -89,6 +92,9 @@ def import_definitions():
 	cmds.update({"rhn-client" : ["/usr/sbin/rhn_check", "/usr/sbin/rhnreg_ks", "/usr/bin/rhn_register", "/usr/bin/rhn-actions-control", "/usr/bin/rhncfg-client", "/usr/sbin/rhn-channel", "/usr/sbin/rhn-profile-sync", "/usr/bin/subscription-manager"]})
 	cmds.update({"mysql-server" : ["/usr/bin/mysqladmin", "/usr/bin/mysql_secure_installation", "/usr/bin/mysql_install_db"]})
 	cmds.update({"postfix" : ["/usr/bin/newaliases", "/usr/sbin/postalias", "/usr/sbin/postconf", "/usr/sbin/postfix", "/usr/sbin/postlock", "/usr/sbin/postmap", "/usr/sbin/postsuper"]})
+	cmds.update({"disk-quotas" : ["/sbin/edquota", "/sbin/quotaon", "/sbin/quotaoff", "/sbin/quotacheck", "/usr/bin/quota", "/usr/sbin/repquota", "/usr/sbin/setquota", "/usr/sbin/convertquota"]})
+	cmds.update({"nfs-server" : ["/usr/sbin/exportfs"]})
+	cmds.update({"nfs-client" : ["/sbin/mount.nfs", "/sbin/mount.nfs4", "/sbin/umount.nfs", "/sbin/umount.nfs4"]})
 	
 	#print definition version:
 	if options.infoOnly == True:
