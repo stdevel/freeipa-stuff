@@ -17,13 +17,13 @@ import subprocess
 
 #set logger and version
 LOGGER = logging.getLogger('ipa-sudo-basic-rules.py')
-vers = "0.1.6"
+vers = "0.1.7"
 
 
 
 def run_cmd(cmd=""):
 	#run the command, it's tricky!
-	if options.dryRun:
+	if options.dry_run:
 		#print what would be done
 		LOGGER.info("I'd like to execute the following command: {0}".format(cmd))
 	else:
@@ -75,7 +75,7 @@ def import_definitions():
 	cmds.update({"fileperm-acl" : ["/usr/bin/chacl", "/usr/bin/gefacl", "/usr/bin/setfacl"]})
 	cmds.update({"locate" : ["/usr/bin/updatedb"]})
 	cmds.update({"networking" : ["/sbin/ifconfig", "/sbin/mii-tool", "/usr/bin/net", "/sbin/ifdown", "/sbin/ifup", "/bin/netstat"]})
-	cmds.update({"firewall" : ["/sbin/iptables", "/usr/sbin/lokkit", "/usr/bin/system-config-firewall-tui"]})
+	cmds.update({"firewall" : ["/sbin/iptables", "/usr/sbin/lokkit", "/usr/bin/system-config-firewall-tui", "/usr/bin/firewall-cmd", "/usr/bin/firewall-offline-cmd"]})
 	cmds.update({"time" : ["/sbin/hwclock", "/bin/timedatectl", "/usr/sbin/ntpdate"]})
 	cmds.update({"processes" : ["/bin/kill", "/usr/bin/killall", "/bin/nice"]})
 	cmds.update({"selinux" : ["/sbin/ausearch", "/usr/bin/audit2allow", "/usr/bin/audit2why", "/usr/sbin/semanage", "/usr/sbin/semodule", "/usr/sbin/setsebool", "/usr/sbin/setenforce"]})
@@ -97,7 +97,7 @@ def import_definitions():
 	cmds.update({"nfs-client" : ["/sbin/mount.nfs", "/sbin/mount.nfs4", "/sbin/umount.nfs", "/sbin/umount.nfs4"]})
 	
 	#print definition version:
-	if options.infoOnly == True:
+	if options.info_only == True:
 		total = [len(v) for v in cmds.values()]
 		counter=0
 		for i in total: counter += i
@@ -105,7 +105,7 @@ def import_definitions():
 		exit(0)
 	
 	#print definitions
-	if options.listOnly == True:
+	if options.list_only == True:
 		for group in cmd_groups:
 			LOGGER.info("Group '{0}' ({1}) has the following commands:".format(group, cmd_groups[group]))
 			LOGGER.info('  ' + ', '.join(cmds[group]))
@@ -126,18 +126,18 @@ def parse_options(args=None):
 Checkout the GitHub page for updates: https://github.com/stdevel/freeipa-utils'''
 	parser = OptionParser(description=desc, version="%prog version {0}".format(vers))
 	#define option groups
-	genOpts = OptionGroup(parser, "Generic Options")
+	genOpts = OptionGroup(parser, "Generic options")
 	parser.add_option_group(genOpts)
 	
 	#GENERIC OPTIONS
 	#-d / --debug
 	genOpts.add_option("-d", "--debug", dest="debug", default=False, action="store_true", help="enable debugging outputs (default: no)")
 	#-n / --dry-run
-	genOpts.add_option("-n", "--dry-run", dest="dryRun", default=False, action="store_true", help="only simulates what the script would do (default: no)")
+	genOpts.add_option("-n", "--dry-run", dest="dry_run", default=False, action="store_true", help="only simulates what the script would do (default: no)")
 	#-i / --info-only
-	genOpts.add_option("-i", "--info-only", dest="infoOnly", default=False, action="store_true", help="only print definition version and quits (default: no)")
+	genOpts.add_option("-i", "--info-only", dest="info_only", default=False, action="store_true", help="only print definition version and quits (default: no)")
 	#-l / --list-only
-	genOpts.add_option("-l", "--list-only", dest="listOnly", default=False, action="store_true", help="only prints definitions and quits (default: no)")
+	genOpts.add_option("-l", "--list-only", dest="list_only", default=False, action="store_true", help="only prints definitions and quits (default: no)")
 	
 	#parse and return options and arguments
 	(options, args) = parser.parse_args(args)
