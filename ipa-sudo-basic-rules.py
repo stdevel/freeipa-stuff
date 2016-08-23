@@ -17,7 +17,7 @@ import subprocess
 
 #set logger and version
 LOGGER = logging.getLogger('ipa-sudo-basic-rules.py')
-vers = "0.1.9"
+vers = "0.2.0"
 
 
 
@@ -86,7 +86,7 @@ def import_definitions():
 	cmds.update({"selinux" : ["/sbin/ausearch", "/usr/bin/audit2allow", "/usr/bin/audit2why", "/usr/sbin/semanage", "/usr/sbin/semodule", "/usr/sbin/setsebool", "/usr/sbin/setenforce", "/usr/sbin/load_policy"]})
 	cmds.update({"selinux-files" : ["/sbin/setfiles", "/sbin/fixfiles", "/usr/bin/chcon", "/sbin/restorecon"]})
 	cmds.update({"services" : ["/sbin/service", "/bin/systemctl", "/sbin/chkconfig"]})
-	cmds.update({"shells" : ["/bin/bash", "/bin/csh", "/bin/dash", "/bin/ksh", "/bin/mksh", "/bin/sh", "/bin/tcsh", "/bin/zsh", "/usr/bin/scl", "/usr/bin/screen", "/usr/bin/tmux", "/bin/vi", "/bin/vim", "/bin/view", "/bin/find"]})
+	cmds.update({"shells" : ["/bin/bash", "/bin/csh", "/bin/dash", "/bin/ksh", "/bin/mksh", "/bin/sh", "/bin/tcsh", "/bin/zsh", "/usr/bin/scl", "/usr/bin/screen", "/usr/bin/tmux", "/bin/vi", "/bin/vim", "/bin/view", "/bin/find", "/usr/bin/bzless", "/usr/bin/bzmore", "/usr/bin/lzless", "/usr/bin/lzmore", "/usr/bin/xzless", "/usr/bin/xzmore", "/usr/bin/zless", "/usr/bin/zmore"]})
 	cmds.update({"software" : ["/bin/rpm", "/usr/bin/up2date", "/usr/bin/yum", "/usr/sbin/yum-complete-transaction", "/usr/bin/yumdownloader", "/usr/bin/yum-config-manager", "/usr/bin/dnf", "/usr/bin/package-cleanup", "/usr/sbin/rpmconf", "/usr/bin/needs-restarting"]})
 	cmds.update({"storage" : ["/bin/mount", "/bin/umount", "/sbin/fdisk", "/sbin/sfdisk", "/sbin/parted", "/sbin/partprobe", "/sbin/mkfs", "/sbin/mkfs.ext3", "/sbin/mkfs.ext4", "/sbin/mkfs.xfs", "/sbin/resize2fs", "/sbin/tune2fs", "/sbin/xfs_growfs", "/sbin/pvchange", "/sbin/pvcreate", "/sbin/pvdisplay", "/sbin/pvmove", "/sbin/pvremove", "/sbin/pvresize", "/sbin/pvs", "/sbin/pvscan", "/sbin/vgchange", "/sbin/vgcreate", "/sbin/vgdisplay", "/sbin/vgexport", "/sbin/vgextend", "/sbin/vgimport", "/sbin/vgreduce", "/sbin/vgremove", "/sbin/vgrename", "/sbin/vgs", "/sbin/vgscan", "/sbin/lvchange", "/sbin/lvcreate", "/sbin/lvdisplay", "/sbin/lvextend", "/sbin/lvreduce", "/sbin/lvremove", "/sbin/lvrename", "/sbin/lvresize", "/sbin/lvscan", "/sbin/lvs", "/usr/bin/rescan-scsi-bus.sh", "/usr/bin/scsi-rescan", "/sbin/multipath", "/sbin/badblocks"]})
 	cmds.update({"su" : ["/bin/su", "/sbin/sulogin", "/sbin/sushell", "/sbin/runuser"]})
