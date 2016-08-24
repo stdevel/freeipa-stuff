@@ -17,7 +17,7 @@ import subprocess
 
 #set logger and version
 LOGGER = logging.getLogger('ipa-sudo-basic-rules.py')
-vers = "0.2.0"
+vers = "0.2.1"
 
 
 
@@ -68,7 +68,8 @@ def import_definitions():
 		"nfs-server" : "Managing NFS servers",
 		"nfs-client" : "Managing NFS mounts",
 		"power" : "Managing power",
-		"bugs" : "Managing bug reports"
+		"bugs" : "Managing bug reports",
+		"hipster-docker" : "Managing Docker containers"
 	}
 	
 	#command defintions
@@ -105,6 +106,7 @@ def import_definitions():
 	cmds.update({"nfs-client" : ["/sbin/mount.nfs", "/sbin/mount.nfs4", "/sbin/umount.nfs", "/sbin/umount.nfs4"]})
 	cmds.update({"power" : ["/usr/sbin/reboot", "/usr/sbin/poweroff", "/sbin/shutdown"]})
 	cmds.update({"bugs" : ["/usr/sbin/abrt-auto-reporting", "/usr/sbin/abrt-configuration", "/usr/bin/abrt-cli"]})
+	cmds.update({"hipster-docker" : ["/usr/bin/docker", "/usr/bin/docker-storage-setup"]})
 	
 	#print definition version:
 	if options.info_only == True:
