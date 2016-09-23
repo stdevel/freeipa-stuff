@@ -17,7 +17,7 @@ import subprocess
 
 #set logger and version
 LOGGER = logging.getLogger('ipa-sudo-basic-rules.py')
-vers = "0.2.3"
+vers = "0.2.4"
 
 
 
@@ -39,6 +39,8 @@ def import_definitions():
 	cmd_groups={"drivers" : "Managing kernel drivers",
 		"editors" : "Editing files",
 		"filemgmt" : "Managing files",
+		"filemgmt-show" : "Displaying files",
+		"filemgmt-find" : "Searching files",
 		"fileperm" : "Managing file permissions",
 		"fileperm-acl" : "Managing ACLs",
 		"locate" : "Managing locate database",
@@ -69,13 +71,16 @@ def import_definitions():
 		"power" : "Managing power",
 		"bugs" : "Managing bug reports",
 		"hipster-docker" : "Managing Docker containers",
-		"gitlab" : "Managing GitLab and GitLab CI installations"
+		"gitlab" : "Managing GitLab and GitLab CI installations",
+		"fail2ban" : "Managing fail2ban"
 	}
 	
 	#command defintions
 	cmds.update({"drivers" : ["/sbin/modprobe", "/sbin/rmmod"]})
-	cmds.update({"editors" : ["/bin/rvi", "/bin/rvim", "/bin/rview", "/usr/bin/sudoedit"]})
+	cmds.update({"editors" : ["/usr/bin/sudoedit"]})
 	cmds.update({"filemgmt" : ["/bin/cp", "/bin/mv", "/usr/bin/rsync", "/bin/rm", "/bin/ls", "/bin/echo", "/bin/cat", "/usr/bin/tail", "/bin/df", "/bin/du", "/bin/mkdir", "/bin/rmdir"]})
+	cmds.update({"filemgmt-show" : ["/bin/vi", "/bin/vim", "/bin/view", "/usr/bin/bzless", "/usr/bin/bzmore", "/usr/bin/lzless", "/usr/bin/lzmore", "/usr/bin/xzless", "/usr/bin/xzmore", "/usr/bin/zless", "/usr/bin/zmore", "/usr/sbin/vipw", "/bin/more", "/usr/bin/less"]})
+	cmds.update({"filemgmt-find" : ["/bin/find"]})
 	cmds.update({"fileperm" : ["/bin/chgrp", "/bin/chmod", "/bin/chown"]})
 	cmds.update({"fileperm-acl" : ["/usr/bin/chacl", "/usr/bin/gefacl", "/usr/bin/setfacl"]})
 	cmds.update({"locate" : ["/usr/bin/updatedb"]})
@@ -86,7 +91,7 @@ def import_definitions():
 	cmds.update({"selinux" : ["/sbin/ausearch", "/usr/bin/audit2allow", "/usr/bin/audit2why", "/usr/sbin/semanage", "/usr/sbin/semodule", "/usr/sbin/setsebool", "/usr/sbin/setenforce", "/usr/sbin/load_policy"]})
 	cmds.update({"selinux-files" : ["/sbin/setfiles", "/sbin/fixfiles", "/usr/bin/chcon", "/sbin/restorecon"]})
 	cmds.update({"services" : ["/sbin/service", "/bin/systemctl", "/sbin/chkconfig"]})
-	cmds.update({"shells" : ["/bin/bash", "/bin/csh", "/bin/dash", "/bin/ksh", "/bin/mksh", "/bin/sh", "/bin/tcsh", "/bin/zsh", "/usr/bin/scl", "/usr/bin/screen", "/usr/bin/tmux", "/bin/vi", "/bin/vim", "/bin/view", "/bin/find", "/usr/bin/bzless", "/usr/bin/bzmore", "/usr/bin/lzless", "/usr/bin/lzmore", "/usr/bin/xzless", "/usr/bin/xzmore", "/usr/bin/zless", "/usr/bin/zmore", "/usr/sbin/vipw", "/usr/sbin/vipw", "/usr/sbin/visudo", "/bin/more", "/usr/bin/less"]})
+	cmds.update({"shells" : ["/bin/bash", "/bin/csh", "/bin/dash", "/bin/ksh", "/bin/mksh", "/bin/sh", "/bin/tcsh", "/bin/zsh", "/usr/bin/scl", "/usr/bin/screen", "/usr/bin/tmux"]})
 	cmds.update({"software" : ["/bin/rpm", "/usr/bin/up2date", "/usr/bin/yum", "/usr/sbin/yum-complete-transaction", "/usr/bin/yumdownloader", "/usr/bin/yum-config-manager", "/usr/bin/dnf", "/usr/bin/package-cleanup", "/usr/sbin/rpmconf", "/usr/bin/needs-restarting"]})
 	cmds.update({"storage" : ["/bin/mount", "/bin/umount", "/sbin/fdisk", "/sbin/sfdisk", "/sbin/parted", "/sbin/partprobe", "/sbin/mkfs", "/sbin/mkfs.ext3", "/sbin/mkfs.ext4", "/sbin/mkfs.xfs", "/sbin/resize2fs", "/sbin/tune2fs", "/sbin/xfs_growfs", "/sbin/pvchange", "/sbin/pvcreate", "/sbin/pvdisplay", "/sbin/pvmove", "/sbin/pvremove", "/sbin/pvresize", "/sbin/pvs", "/sbin/pvscan", "/sbin/vgchange", "/sbin/vgcreate", "/sbin/vgdisplay", "/sbin/vgexport", "/sbin/vgextend", "/sbin/vgimport", "/sbin/vgreduce", "/sbin/vgremove", "/sbin/vgrename", "/sbin/vgs", "/sbin/vgscan", "/sbin/lvchange", "/sbin/lvcreate", "/sbin/lvdisplay", "/sbin/lvextend", "/sbin/lvreduce", "/sbin/lvremove", "/sbin/lvrename", "/sbin/lvresize", "/sbin/lvscan", "/sbin/lvs", "/usr/bin/rescan-scsi-bus.sh", "/usr/bin/scsi-rescan", "/sbin/multipath", "/sbin/badblocks", "/sbin/blkid"]})
 	cmds.update({"su" : ["/bin/su", "/sbin/sulogin", "/sbin/sushell", "/sbin/runuser"]})
@@ -107,6 +112,7 @@ def import_definitions():
 	cmds.update({"bugs" : ["/usr/sbin/abrt-auto-reporting", "/usr/sbin/abrt-configuration", "/usr/bin/abrt-cli"]})
 	cmds.update({"hipster-docker" : ["/usr/bin/docker", "/usr/bin/docker-storage-setup"]})
 	cmds.update({"gitlab" : ["/usr/bin/gitlab-ci-multi-runner"]})
+	cmds.update({"fail2ban" : ["/usr/bin/fail2ban-client"]})
 	
 	#print definition version:
 	if options.info_only == True:
