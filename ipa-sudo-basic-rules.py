@@ -4,7 +4,7 @@
 # ipa-sudo-basic-rules.py - a script for importing
 # basic sudo command and command group definitions
 #
-# 2016 By Christian Stankowic
+# 2017 By Christian Stankowic
 # <info at stankowic hyphen development dot net>
 # https://github.com/stdevel
 #
@@ -17,7 +17,7 @@ import subprocess
 
 #set logger and version
 LOGGER = logging.getLogger('ipa-sudo-basic-rules.py')
-vers = "0.2.4"
+vers = "0.2.5"
 
 
 
@@ -48,6 +48,7 @@ def import_definitions():
 		"firewall" : "Managing firewall configuration",
 		"time" : "Managing time/date configuration",
 		"processes" : "Managing processes",
+		"puppet" : "Master of Puppets",
 		"selinux" : "Managing SELinux",
 		"selinux-files" : "Managing SELinux file contexts",
 		"services" : "Managing system services",
@@ -88,6 +89,7 @@ def import_definitions():
 	cmds.update({"firewall" : ["/sbin/iptables", "/usr/sbin/lokkit", "/usr/bin/system-config-firewall-tui", "/usr/bin/firewall-cmd", "/usr/bin/firewall-offline-cmd"]})
 	cmds.update({"time" : ["/sbin/hwclock", "/bin/timedatectl", "/usr/sbin/ntpdate"]})
 	cmds.update({"processes" : ["/bin/kill", "/usr/bin/killall", "/bin/nice", "/usr/bin/renice", "/usr/sbin/lsof", "/sbin/fuser"]})
+	cmds.update({"puppet" : ["/usr/bin/puppet"]})
 	cmds.update({"selinux" : ["/sbin/ausearch", "/usr/bin/audit2allow", "/usr/bin/audit2why", "/usr/sbin/semanage", "/usr/sbin/semodule", "/usr/sbin/setsebool", "/usr/sbin/setenforce", "/usr/sbin/load_policy"]})
 	cmds.update({"selinux-files" : ["/sbin/setfiles", "/sbin/fixfiles", "/usr/bin/chcon", "/sbin/restorecon"]})
 	cmds.update({"services" : ["/sbin/service", "/bin/systemctl", "/sbin/chkconfig"]})
