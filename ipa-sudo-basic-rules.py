@@ -17,7 +17,7 @@ import subprocess
 
 #set logger and version
 LOGGER = logging.getLogger('ipa-sudo-basic-rules.py')
-vers = "0.2.5"
+vers = "0.2.6"
 
 
 
@@ -103,7 +103,7 @@ def import_definitions():
 	cmds.update({"ipa-server" : ["/usr/bin/ipa", "/usr/sbin/ipa-ca-install", "/usr/sbin/ipa-csreplica-manage", "/usr/sbin/ipa-otptoken-import", "/usr/sbin/ipa-restore", "/usr/sbin/ipa-upgradeconfig", "/usr/sbin/ipa-adtrust-install", "/usr/sbin/ipactl", "/usr/sbin/ipa-kra-install", "/usr/sbin/ipa-replica-conncheck", "/usr/sbin/ipa-winsync-migrate", "/usr/sbin/ipa-advise", "/usr/sbin/ipa-dns-install", "/usr/sbin/ipa-ldap-updater", "/usr/sbin/ipa-replica-install", "/usr/sbin/ipa-server-certinstall", "/usr/sbin/ipa-backup", "/usr/sbin/ipa-managed-entries", "/usr/sbin/ipa-replica-manage", "/usr/sbin/ipa-server-install", "/usr/sbin/ipa-cacert-manage", "/usr/sbin/ipa-compat-manage", "/usr/sbin/ipa-nis-manage", "/usr/sbin/ipa-replica-prepare", "/usr/sbin/ipa-server-upgrade"]})
 	cmds.update({"rhn-server" : ["/usr/sbin/rhn-satellite", "/usr/sbin/spacewalk-service", "/usr/bin/rhn-satellite-activate", "/usr/bin/rhn-satellite-exporter", "/usr/bin/rhn-schema-version", "/usr/bin/spacewalk-cfg-get", "/usr/bin/spacewalk-common-channels", "/usr/bin/spacewalk-data-fsck", "/usr/bin/spacewalk-debug", "/usr/bin/spacewalk-export", "/usr/bin/spacewalk-export-channels", "/usr/bin/spacewalk-hostname-rename", "/usr/bin/spacewalk-remove-channel", "/usr/bin/spacewalk-report", "/usr/bin/spacewalk-repo-sync", "/usr/bin/spacewalk-schema-upgrade", "/usr/bin/spacewalk-selinux-enable", "/usr/bin/spacewalk-setup", "/usr/bin/spacewalk-setup-cobbler", "/usr/bin/spacewalk-setup-ipa-authentication", "/usr/bin/spacewalk-setup-jabberd"]})
 	cmds.update({"rhn-client" : ["/usr/sbin/rhn_check", "/usr/sbin/rhnreg_ks", "/usr/bin/rhn_register", "/usr/bin/rhn-actions-control", "/usr/bin/rhncfg-client", "/usr/sbin/rhn-channel", "/usr/sbin/rhn-profile-sync"]})
-	cmds.update({"katello-server" : ["/usr/bin/katello-service", "/usr/bin/katello-backup", "/usr/bin/katello-restore", "/usr/bin/katello-certs-sign", "/usr/bin/katello-certs-gen-rpm", "/usr/sbin/katello-certs-check", "/usr/sbin/katello-installer", "/usr/bin/katello-remove", "/usr/sbin/katello-selinux-disable", "/usr/sbin/katello-selinux-enable", "/usr/sbin/katello-selinux-relabel"]})
+	cmds.update({"katello-server" : ["/usr/bin/katello-service", "/usr/bin/katello-backup", "/usr/bin/katello-restore", "/usr/bin/katello-certs-sign", "/usr/bin/katello-certs-gen-rpm", "/usr/sbin/katello-certs-check", "/usr/sbin/katello-installer", "/usr/bin/katello-remove", "/usr/sbin/katello-selinux-disable", "/usr/sbin/katello-selinux-enable", "/usr/sbin/katello-selinux-relabel", "/usr/sbin/foreman-rake"]})
 	cmds.update({"katello-client" : ["/usr/bin/subscription-manager", "/usr/bin/katello-rhsm-consumer"]})
 	cmds.update({"mysql-server" : ["/usr/bin/mysqladmin", "/usr/bin/mysql_secure_installation", "/usr/bin/mysql_install_db"]})
 	cmds.update({"postfix" : ["/usr/bin/newaliases", "/usr/sbin/postalias", "/usr/sbin/postconf", "/usr/sbin/postfix", "/usr/sbin/postlock", "/usr/sbin/postmap", "/usr/sbin/postsuper"]})
