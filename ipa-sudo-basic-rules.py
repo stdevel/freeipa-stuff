@@ -90,7 +90,7 @@ def import_definitions():
         "hipster-docker" : "Managing Docker containers",
         "gitlab" : "Managing GitLab and GitLab CI installations",
         "fail2ban" : "Managing fail2ban",
-        "system-who" : "Stalking system's users",
+        "system-who" : "Stalking systems users",
         "samba-server" : "Managing Samba servers",
         "ipmi-tools" : "Managing IPMI"
     }
@@ -104,7 +104,7 @@ def import_definitions():
     ]})
     cmds.update({"filemgmt" : [
         "/bin/cp", "/bin/mv", "/usr/bin/rsync", "/bin/rm", "/bin/ls", "/bin/echo",
-        "/bin/cat", "/usr/bin/tail", "/bin/df", "/bin/du", "/bin/mkdir", "/bin/rmdir"
+        "/bin/cat", "/usr/bin/tail", "/bin/mkdir", "/bin/rmdir"
     ]})
     cmds.update({"filemgmt-show" : [
         "/bin/vi", "/bin/vim", "/bin/view", "/usr/bin/bzless", "/usr/bin/bzmore",
