@@ -18,7 +18,7 @@ LOGGER = logging.getLogger('ipa-sudo-basic-rules.py')
 """
 logging: Logger instance
 """
-__version__ = "0.2.7"
+__version__ = "0.2.8"
 """
 str: Script version
 """
@@ -92,7 +92,8 @@ def import_definitions():
         "fail2ban" : "Managing fail2ban",
         "system-who" : "Stalking systems users",
         "samba-server" : "Managing Samba servers",
-        "ipmi-tools" : "Managing IPMI"
+        "ipmi-tools" : "Managing IPMI",
+        "cron" : "Managing cronjobs"
     }
 
     #command defintions
@@ -103,13 +104,15 @@ def import_definitions():
         "/usr/bin/sudoedit"
     ]})
     cmds.update({"filemgmt" : [
-        "/bin/cp", "/bin/mv", "/usr/bin/rsync", "/bin/rm", "/bin/ls", "/bin/echo",
-        "/bin/cat", "/usr/bin/tail", "/bin/mkdir", "/bin/rmdir"
+        "/bin/cp", "/bin/mv", "/usr/bin/rsync", "/bin/rm",
+        "/bin/ls", "/bin/echo", "/bin/cat", "/usr/bin/tail",
+        "/bin/mkdir", "/bin/rmdir"
     ]})
     cmds.update({"filemgmt-show" : [
-        "/bin/vi", "/bin/vim", "/bin/view", "/usr/bin/bzless", "/usr/bin/bzmore",
-        "/usr/bin/lzless", "/usr/bin/lzmore", "/usr/bin/xzless", "/usr/bin/xzmore",
-        "/usr/bin/zless", "/usr/bin/zmore", "/usr/sbin/vipw", "/bin/more",
+        "/bin/vi", "/bin/vim", "/bin/view", "/usr/bin/bzless",
+        "/usr/bin/bzmore", "/usr/bin/lzless", "/usr/bin/lzmore",
+        "/usr/bin/xzless", "/usr/bin/xzmore", "/usr/bin/zless",
+        "/usr/bin/zmore", "/usr/sbin/vipw", "/bin/more",
         "/usr/bin/less"
     ]})
     cmds.update({"filemgmt-find" : [
@@ -128,12 +131,13 @@ def import_definitions():
         "/usr/bin/updatedb"
     ]})
     cmds.update({"networking" : [
-        "/sbin/ifconfig", "/sbin/mii-tool", "/usr/bin/net", "/sbin/ifdown",
-        "/sbin/ifup", "/bin/netstat"
+        "/sbin/ifconfig", "/sbin/mii-tool", "/usr/bin/net",
+        "/sbin/ifdown", "/sbin/ifup", "/bin/netstat"
     ]})
     cmds.update({"firewall" : [
-        "/sbin/iptables", "/usr/sbin/lokkit", "/usr/bin/system-config-firewall-tui",
-        "/usr/bin/firewall-cmd", "/usr/bin/firewall-offline-cmd"
+        "/sbin/iptables", "/usr/sbin/lokkit",
+        "/usr/bin/system-config-firewall-tui", "/usr/bin/firewall-cmd",
+        "/usr/bin/firewall-offline-cmd"
     ]})
     cmds.update({"time" : [
         "/sbin/hwclock", "/bin/timedatectl", "/usr/sbin/ntpdate"
@@ -157,14 +161,16 @@ def import_definitions():
         "/sbin/service", "/bin/systemctl", "/sbin/chkconfig"
     ]})
     cmds.update({"shells" : [
-        "/bin/bash", "/bin/csh", "/bin/dash", "/bin/ksh", "/bin/mksh", "/bin/sh",
-        "/bin/tcsh", "/bin/zsh", "/usr/bin/scl", "/usr/bin/screen", "/usr/bin/tmux"
+        "/bin/bash", "/bin/csh", "/bin/dash", "/bin/ksh", "/bin/mksh",
+        "/bin/sh", "/bin/tcsh", "/bin/zsh", "/usr/bin/scl", "/usr/bin/screen",
+        "/usr/bin/tmux"
     ]})
     cmds.update({"software" : [
         "/bin/rpm", "/usr/bin/up2date", "/usr/bin/yum",
         "/usr/sbin/yum-complete-transaction", "/usr/bin/yumdownloader",
-        "/usr/bin/yum-config-manager", "/usr/bin/dnf", "/usr/bin/package-cleanup",
-        "/usr/sbin/rpmconf", "/usr/bin/needs-restarting"
+        "/usr/bin/yum-config-manager", "/usr/bin/dnf",
+        "/usr/bin/package-cleanup", "/usr/sbin/rpmconf",
+        "/usr/bin/needs-restarting"
     ]})
     cmds.update({"storage-mount" : [
         "/bin/mount", "/bin/umount"
@@ -187,8 +193,8 @@ def import_definitions():
         "/sbin/resize2fs", "/sbin/tune2fs", "/sbin/xfs_growfs"
     ]})
     cmds.update({"storage-generic" : [
-        "/usr/bin/rescan-scsi-bus.sh", "/usr/bin/scsi-rescan", "/sbin/multipath",
-        "/sbin/badblocks", "/sbin/blkid"
+        "/usr/bin/rescan-scsi-bus.sh", "/usr/bin/scsi-rescan",
+        "/sbin/multipath", "/sbin/badblocks", "/sbin/blkid"
     ]})
     cmds.update({"storage-analysis" : [
         "/usr/bin/iostat", "/usr/sbin/iotop"
@@ -208,8 +214,8 @@ def import_definitions():
     cmds.update({"ipa-client" : [
         "/usr/sbin/ipa-client-install", "/usr/sbin/ipa-client-automount",
         "/usr/sbin/ipa-certupdate", "/usr/bin/ipa-getcert",
-        "/usr/sbin/ipa-getkeytab", "/usr/sbin/ipa-join", "/usr/sbin/ipa-rmkeytab",
-        "/usr/sbin/sss_cache"
+        "/usr/sbin/ipa-getkeytab", "/usr/sbin/ipa-join",
+        "/usr/sbin/ipa-rmkeytab", "/usr/sbin/sss_cache"
     ]})
     cmds.update({"ipa-server" : [
         "/usr/bin/ipa", "/usr/sbin/ipa-ca-install",
@@ -232,7 +238,8 @@ def import_definitions():
         "/usr/bin/rhn-schema-version", "/usr/bin/spacewalk-cfg-get",
         "/usr/bin/spacewalk-common-channels", "/usr/bin/spacewalk-data-fsck",
         "/usr/bin/spacewalk-debug", "/usr/bin/spacewalk-export",
-        "/usr/bin/spacewalk-export-channels", "/usr/bin/spacewalk-hostname-rename",
+        "/usr/bin/spacewalk-export-channels",
+        "/usr/bin/spacewalk-hostname-rename",
         "/usr/bin/spacewalk-remove-channel", "/usr/bin/spacewalk-report",
         "/usr/bin/spacewalk-repo-sync", "/usr/bin/spacewalk-schema-upgrade",
         "/usr/bin/spacewalk-selinux-enable", "/usr/bin/spacewalk-setup",
@@ -278,7 +285,8 @@ def import_definitions():
         "/sbin/umount.nfs4"
     ]})
     cmds.update({"power" : [
-        "/usr/sbin/reboot", "/usr/sbin/poweroff", "/sbin/shutdown", "/usr/sbin/halt"
+        "/usr/sbin/reboot", "/usr/sbin/poweroff", "/sbin/shutdown",
+        "/usr/sbin/halt"
     ]})
     cmds.update({"bugs" : [
         "/usr/sbin/abrt-auto-reporting", "/usr/sbin/abrt-configuration",
@@ -309,6 +317,9 @@ def import_definitions():
         "/usr/sbin/ipmi-sel", "/usr/sbin/ipmimonitoring",
         "/usr/bin/ipmitool"
     ]})
+    cmds.update({"cron" : [
+        "/usr/bin/crontab"
+    ]})
 
     #print definition version:
     if options.info_only:
@@ -317,8 +328,8 @@ def import_definitions():
         for i in total:
             counter += i
         LOGGER.info(
-            "This definition has version %s and consists of %i command groups " \
-            "and %i commands.", __version__, len(cmd_groups), counter
+            "This definition has version %s and consists of %i command " \
+            "groups and %i commands.", __version__, len(cmd_groups), counter
         )
         exit(0)
 
@@ -334,7 +345,8 @@ def import_definitions():
 
     #simulate/import definitions
     for grp in cmd_groups:
-        run_cmd("ipa sudocmdgroup-add {0} --desc='{1}'".format(grp, cmd_groups[grp]))
+        run_cmd("ipa sudocmdgroup-add {0} --desc='{1}'".format(
+            grp, cmd_groups[grp]))
         for cmdl in cmds[grp]:
             run_cmd(
                 "ipa sudocmd-add '{0}' && ipa sudocmdgroup-add-member {1} "\
@@ -351,7 +363,8 @@ def parse_options(args=None):
     "groups into an existing FreeIPA installation. " \
     "Checkout the GitHub page for updates: " \
     "https://github.com/stdevel/freeipa-utils"
-    parser = OptionParser(description=desc, version="%prog version {0}".format(__version__))
+    parser = OptionParser(
+        description=desc, version="%prog version {0}".format(__version__))
     #define option groups
     gen_opts = OptionGroup(parser, "Generic options")
     parser.add_option_group(gen_opts)
@@ -369,12 +382,14 @@ def parse_options(args=None):
     )
     #-i / --info-only
     gen_opts.add_option(
-        "-i", "--info-only", dest="info_only", default=False, action="store_true",
+        "-i", "--info-only", dest="info_only",
+        default=False, action="store_true",
         help="only print definition version and quits (default: no)"
     )
     #-l / --list-only
     gen_opts.add_option(
-        "-l", "--list-only", dest="list_only", default=False, action="store_true",
+        "-l", "--list-only", dest="list_only",
+        default=False, action="store_true",
         help="only prints definitions and quits (default: no)"
     )
 
