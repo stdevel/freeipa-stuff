@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "version": "0.3.0"
+    "version": "0.3.1"
   },
   "groups": {
     "drivers": "Managing kernel drivers",
@@ -246,7 +246,7 @@
         "/usr/bin/abrt-cli"
     ],
     "hipster-docker": [
-        "/usr/bin/docker", "/usr/bin/docker-storage-setup"
+        "/usr/bin/docker", "/usr/bin/docker-storage-setup", "/usr/bin/docker-compose"
     ],
     "gitlab": [
         "/usr/bin/gitlab-ci-multi-runner"
